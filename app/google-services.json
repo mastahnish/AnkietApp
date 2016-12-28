@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "125313494686",
+    "firebase_url": "https://ankietapp.firebaseio.com",
+    "project_id": "ankietapp",
+    "storage_bucket": "ankietapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125313494686:android:6edac5de21995896",
+        "android_client_info": {
+          "package_name": "com.solutions.myo.ankietapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125313494686-7n2fn0om0guarrlqlg661d2oqubtf2eg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solutions.myo.ankietapp",
+            "certificate_hash": "1E60B2FC091C0D6316DED540DD947A778D744598"
+          }
+        },
+        {
+          "client_id": "125313494686-d5potlhmk05vfqmg8okrgp64grj90fv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwpak9UhWZgsbm5moS6MUWYOqHQHI5rJM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125313494686-d5potlhmk05vfqmg8okrgp64grj90fv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
