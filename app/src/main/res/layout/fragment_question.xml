@@ -1,0 +1,15 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.solutions.myo.ankietapp.workflow.survey.fragments.QuestionFragment"
+>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/question_content"
+                    layout="@layout/question_content" />
+
+        </RelativeLayout>
+</layout>

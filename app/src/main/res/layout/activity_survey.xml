@@ -1,0 +1,71 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.solutions.myo.ankietapp.workflow.survey.SurveyActivity">
+    <data>
+        <import type="android.view.View.OnClickListener"/>
+        <variable
+            name="clickListener"
+            type="OnClickListener"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.victoralbertos.breadcumbs_view.BreadcrumbsView
+            android:id="@+id/breadcrumbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/menu_btn_image_margin"
+            android:layout_alignParentTop="true"
+            app:heightSeparator="@dimen/height_separator"
+            app:nextStepBorderDotColor="@color/colorNext"
+            app:nextStepFillDotColor="@color/colorNext"
+            app:nextStepSeparatorColor="@color/colorNext"
+            app:numberOfSteps="@integer/breadcrumbSize"
+            app:radiusDot="@dimen/radius_dot"
+            app:sizeDotBorder="@dimen/size_dot_border"
+            app:visitedStepBorderDotColor="@color/colorVisited"
+            app:visitedStepFillDotColor="@color/colorVisited"
+            app:visitedStepSeparatorColor="@color/colorVisited" />
+
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_buttons"
+            android:layout_below="@id/breadcrumbs" />
+
+        <LinearLayout
+            android:id="@+id/bottom_buttons"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:onClick="@{clickListener.onClick}"
+                style="@style/AnkietAppButton"
+                android:id="@+id/bt_prev"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorVisited"
+                android:text="@string/prev"
+               />
+
+            <Button
+                android:onClick="@{clickListener.onClick}"
+                android:id="@+id/bt_next"
+                style="@style/AnkietAppButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorVisited"
+                android:text="@string/next"
+             />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

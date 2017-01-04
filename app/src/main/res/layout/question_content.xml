@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/question"
+            style="@style/ankietapp_primary_big_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/question_first"
+            android:textAlignment="center" />
+
+
+        <com.eugeneek.smilebar.SmileBar
+            android:id="@+id/starBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:enabled="true"
+            app:horizontalSpacing="8dp"
+            app:rating="0"
+            app:smileDefault="@drawable/rating_default"
+            app:smileHeight="60dp"
+            app:smileRate1="@drawable/rating1"
+            app:smileRate2="@drawable/rating2"
+            app:smileRate3="@drawable/rating3"
+            app:smileRate4="@drawable/rating4"
+            app:smileRate5="@drawable/rating5"
+            app:smileWidth="60dp" />
+    </RelativeLayout>
+</layout>

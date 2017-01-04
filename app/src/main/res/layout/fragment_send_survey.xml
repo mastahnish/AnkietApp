@@ -1,0 +1,54 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.solutions.myo.ankietapp.workflow.survey.fragments.SendSurveyFragment">
+
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <variable
+            name="clickListener"
+            type="OnClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:id="@+id/btnSendSurvey"
+            style="@style/dashboard_btn_linear_grid"
+            android:onClick="@{clickListener.onClick}">
+
+            <LinearLayout
+                style="@style/dashboard_btn_img_linear_grid"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/menu_btn_image_margin"
+                    android:src="@drawable/send_survey" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/dashboard_btn_text_linear_grid">
+
+                <TextView
+                    style="@style/dashboard_grid_primary_text_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/menu_btn_description_top_margin"
+                    android:text="@string/send_survey" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

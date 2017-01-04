@@ -15,5 +15,8 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="primaryWhite">#ffffffff</color>
+    <color name="colorVisited">@color/colorAccent</color>
+    <color name="colorNext">@color/colorAccentTransparent</color>
+
 
 </resources>

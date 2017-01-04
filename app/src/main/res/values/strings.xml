@@ -4,7 +4,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Zaloguj się</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -19,5 +19,17 @@
     <string name="enter">Zaczynamy !</string>
     <string name="analyze">Analizuj</string>
     <string name="add_survey">Jak jest?</string>
+    <string name="prev">Wstecz</string>
+    <string name="next">Dalej</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="question_first">Czy byłaś grzeczna?</string>
+    <string name="question_second">Czy wkurzyłaś się dzisiaj na pracę?</string>
+    <string name="question_third">Jak czysto jest w mieszkaniu?</string>
+    <string name="question_fourth">Czy pokłóciłaś się dzisiaj z Jackiem?</string>
+    <string name="question_fifth">Czy zrobiłaś dzisiaj coś pożytecznego?</string>
+    <string name="question_sixth">Ogólna samoocena</string>
+    <string name="send_survey">Wyślij</string>
 
 </resources>

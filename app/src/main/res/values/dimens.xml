@@ -12,4 +12,7 @@
     <dimen name="dashboard_grid_item_text_width">120dp</dimen>
     <dimen name="menu_btn_image_margin">15dp</dimen>
     <dimen name="menu_btn_description_top_margin">8dp</dimen>
+    <dimen name="radius_dot">5dp</dimen>
+    <dimen name="size_dot_border">1dp</dimen>
+    <dimen name="height_separator">1dp</dimen>
 </resources>

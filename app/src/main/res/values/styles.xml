@@ -69,6 +69,12 @@
         <item name="android:textColor">@color/primaryWhite</item>
     </style>
 
+
+    <style name="dashboard_grid_primary_text_large" parent="ankietapp_font_text_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
     <style name="dashboard_btn_linear_grid">
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center_horizontal</item>
