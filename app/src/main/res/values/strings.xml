@@ -14,4 +14,10 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="enter">Zaczynamy !</string>
+    <string name="analyze">Analizuj</string>
+    <string name="add_survey">Jak jest?</string>
+
 </resources>

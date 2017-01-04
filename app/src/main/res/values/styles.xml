@@ -1,20 +1,104 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/ankietapp_white_button_text</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/ankietapp_white_button_text</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="AnkietAppButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">53dp</item>
+        <item name="android:layout_marginLeft">14dp</item>
+        <item name="android:layout_marginRight">14dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:background">@drawable/hint_btn_background_accent</item>
+        <item name="android:textAppearance">@style/ankietapp_white_button_text</item>
+    </style>
+
+    <style name="ankietapp_white_button_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primaryWhite</item>
+    </style>
+
+    <style name="ankietapp_text_inputs_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primaryWhite</item>
+    </style>
+
+
+    <style name="ankietapp_white_big_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/primaryWhite</item>
+    </style>
+
+    <style name="ankietapp_primary_big_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="dashboard_grid_text_large" parent="ankietapp_font_text_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryWhite</item>
+    </style>
+
+    <style name="dashboard_btn_linear_grid">
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/dashboard_grid_margin_item_left_right</item>
+        <item name="android:layout_marginRight">@dimen/dashboard_grid_margin_item_left_right</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dashboard_btn_img_linear_grid">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/dashboard_grid_btn_background_shape</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">@dimen/dashboard_grid_img_item_width</item>
+        <item name="android:layout_height">@dimen/dashboard_grid_img_item_height</item>
+    </style>
+
+    <style name="dashboard_btn_text_linear_grid">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">@dimen/dashboard_grid_item_text_width</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    //Fonts
+    <style name="ankietapp_font_text_style">
+        <item name="android:typeface">monospace</item>
+    </style>
+
 
 </resources>
