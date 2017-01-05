@@ -1,19 +1,29 @@
 package com.solutions.myo.ankietapp.workflow.survey;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.databinding.ActivitySurveyBinding;
+import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyDataManager;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyFlowMemory;
 import com.solutions.myo.ankietapp.workflow.survey.state.SurveyStateManager;
 
+import static com.solutions.myo.ankietapp.workflow.survey.camera.config.GMSConfig.RC_HANDLE_CAMERA_PERM;
+
 public class SurveyActivity extends AppCompatActivity implements BaseStateManager.IStateChangeListener, View.OnClickListener, ISurveyHolder {
+
+    private static final String TAG = SurveyActivity.class.getSimpleName();
 
     private ActivitySurveyBinding binding;
 
@@ -106,4 +116,47 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
     public SurveyDataManager getSurveyDataManager() {
         return surveyDataManager;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode != RC_HANDLE_CAMERA_PERM) {
+            Log.d(TAG, "Got unexpected permission result: " + requestCode);
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+
+        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "Camera permission granted - initialize the camera source");
+            // we have permission, so create the camerasource
+            if(getCurrentFragment() instanceof IPermissionsListener){
+                ((IPermissionsListener) getCurrentFragment()).onPermissionGranted();
+            }
+
+            return;
+        }
+
+        Log.e(TAG, "Permission not granted: results len = " + grantResults.length +
+                " Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
+
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                if(getCurrentFragment() instanceof IPermissionsListener){
+                    ((IPermissionsListener) getCurrentFragment()).onPermissionRejected();
+                }
+//                finish();
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.app_name))
+                .setMessage(R.string.no_camera_permission)
+                .setPositiveButton(R.string.ok, listener)
+                .show();
+    }
+
+    protected Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+    }
+
 }

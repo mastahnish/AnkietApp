@@ -32,4 +32,11 @@
     <string name="question_sixth">Ogólna samoocena</string>
     <string name="send_survey">Wyślij</string>
 
+    <!-- Face trcking-->
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Potrzebujemy dostępu do kamery</string>
+    <string name="no_camera_permission">Niestety nie można zrobić zdjęcia bez kamery.\nNadaj uprawnienia</string>
+    <string name="low_storage_error">Potrzebujemy więcej miejsca na dyskuy żeby pobrać rozpoznawanie twarzy. Usuń niepotrzebne dane.</string>
+
+
 </resources>

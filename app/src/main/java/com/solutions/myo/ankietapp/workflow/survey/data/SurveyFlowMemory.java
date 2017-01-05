@@ -19,6 +19,9 @@ public class SurveyFlowMemory {
 
     private List<Question> currentQuestionList;
 
+
+    private String encodedPhoto;
+
     public Question getCurrentQuestion() {
         return currentQuestion;
     }
@@ -33,8 +36,6 @@ public class SurveyFlowMemory {
                 currentQuestionList.add(currentQuestion);
             }
         }
-
-
 
         this.currentQuestion = currentQuestion;
     }
@@ -53,5 +54,14 @@ public class SurveyFlowMemory {
 
     public void setSurveyDate(Date surveyDate) {
         this.surveyDate = surveyDate;
+    }
+
+
+    public String getEncodedPhoto() {
+        return encodedPhoto;
+    }
+
+    public void setEncodedPhoto(String encodedPhoto) {
+        this.encodedPhoto = encodedPhoto;
     }
 }
