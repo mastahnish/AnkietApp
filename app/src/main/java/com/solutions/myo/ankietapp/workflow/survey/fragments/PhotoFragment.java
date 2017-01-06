@@ -100,6 +100,11 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
             case R.id.fab_take_photo:
                 mCameraHelper.getmCameraSource().takePicture(shutterCallback, pictureCallback);
                 break;
+            case R.id.fab_retake_photo:
+                if (mCameraHelper != null) {
+                    mCameraHelper.startCameraSource();
+                }
+                break;
         }
     }
 
@@ -114,7 +119,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
     CameraSource.ShutterCallback shutterCallback = new CameraSource.ShutterCallback() {
         @Override
         public void onShutter() {
-            mCameraHelper.getmCameraSource().stop();
+            mCameraHelper.stopCameraSource();
         }
     };
 

@@ -150,6 +150,12 @@ public class CameraHelper extends PermissionsHelper {
         }
     }
 
+    public void stopCameraSource() {
+        if(mCameraSource !=null) {
+            mCameraSourcePreview.stop();
+        }
+    }
+
 
 
     public CameraSource getmCameraSource() {
