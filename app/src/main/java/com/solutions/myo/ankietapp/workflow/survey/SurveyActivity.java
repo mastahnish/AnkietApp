@@ -13,6 +13,7 @@ import android.view.View;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.databinding.ActivitySurveyBinding;
+import com.solutions.myo.ankietapp.ui.breadcrumb.IAnimationListener;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyDataManager;
@@ -21,7 +22,7 @@ import com.solutions.myo.ankietapp.workflow.survey.state.SurveyStateManager;
 
 import static com.solutions.myo.ankietapp.workflow.survey.camera.config.GMSConfig.RC_HANDLE_CAMERA_PERM;
 
-public class SurveyActivity extends AppCompatActivity implements BaseStateManager.IStateChangeListener, View.OnClickListener, ISurveyHolder {
+public class SurveyActivity extends AppCompatActivity implements BaseStateManager.IStateChangeListener, View.OnClickListener, ISurveyHolder{
 
     private static final String TAG = SurveyActivity.class.getSimpleName();
 
@@ -53,21 +54,35 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
     public BaseStateManager.BaseState processState(int event) {
 
         modifyBreadcrumb(event);
-
-        mState = mState.processState(event);
-
-
-
         return mState;
     }
 
-    private void modifyBreadcrumb(int event) {
+    private void modifyBreadcrumb(final int event) {
         switch(event){
             case BaseStateManager.EVENT_PREVIOUS:
-                if(binding.breadcrumbs.getCurrentStep()> 0) binding.breadcrumbs.prevStep();
+                if(binding.breadcrumbs.getCurrentStep()> 0){
+                    binding.breadcrumbs.prevStep(new IAnimationListener() {
+                        @Override
+                        public void onAnimationFinished() {
+                            mState = mState.processState(event);
+
+                        }
+                    });
+                }else{
+                    mState = mState.processState(event);
+                }
                 break;
             case BaseStateManager.EVENT_NEXT:
-                if(binding.breadcrumbs.getCurrentStep() < getResources().getInteger(R.integer.breadcrumbSize)-1) binding.breadcrumbs.nextStep();
+                if(binding.breadcrumbs.getCurrentStep() < getResources().getInteger(R.integer.breadcrumbSize)-1) {
+                    binding.breadcrumbs.nextStep(new IAnimationListener() {
+                        @Override
+                        public void onAnimationFinished() {
+                            mState = mState.processState(event);
+                        }
+                    });
+                }else{
+                    mState = mState.processState(event);
+                }
                 break;
         }
     }
@@ -158,5 +173,6 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
     protected Fragment getCurrentFragment() {
         return getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
     }
+
 
 }

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <io.victoralbertos.breadcumbs_view.BreadcrumbsView
+        <com.solutions.myo.ankietapp.ui.breadcrumb.BreadcrumbsView
             android:id="@+id/breadcrumbs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
