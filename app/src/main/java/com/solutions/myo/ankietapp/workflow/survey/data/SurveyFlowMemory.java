@@ -19,8 +19,9 @@ public class SurveyFlowMemory {
 
     private List<Question> currentQuestionList;
 
-
     private String encodedPhoto;
+
+    private int smileMeasurement;
 
     public Question getCurrentQuestion() {
         return currentQuestion;
@@ -63,5 +64,25 @@ public class SurveyFlowMemory {
 
     public void setEncodedPhoto(String encodedPhoto) {
         this.encodedPhoto = encodedPhoto;
+    }
+
+
+    public int getSmileMeasurement() {
+        return smileMeasurement;
+    }
+
+    public void setSmileMeasurement(int smileMeasurement) {
+        this.smileMeasurement = smileMeasurement;
+    }
+
+    @Override
+    public String toString() {
+        return "SurveyFlowMemory{" +
+                "surveyDate=" + surveyDate +
+                ", currentQuestion=" + currentQuestion +
+                ", currentQuestionList=" + currentQuestionList +
+                ", encodedPhoto='" + encodedPhoto + '\'' +
+                ", smileMeasurement=" + smileMeasurement +
+                '}';
     }
 }

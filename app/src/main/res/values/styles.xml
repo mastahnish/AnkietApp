@@ -60,7 +60,7 @@
     </style>
 
     <style name="ankietapp_primary_big_text" parent="ankietapp_font_text_style">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">40sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 

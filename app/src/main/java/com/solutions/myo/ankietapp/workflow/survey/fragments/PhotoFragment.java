@@ -2,12 +2,15 @@ package com.solutions.myo.ankietapp.workflow.survey.fragments;
 
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import android.view.ViewGroup;
 import com.google.android.gms.vision.CameraSource;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.databinding.FragmentPhotoBinding;
-import com.solutions.myo.ankietapp.utils.StringUtils;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
 import com.solutions.myo.ankietapp.workflow.survey.camera.photo.PhotoHelper;
 import com.solutions.myo.ankietapp.workflow.survey.camera.ui.CameraHelper;
@@ -98,11 +100,22 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
         switch (id) {
             case R.id.fab_take_photo:
-                mCameraHelper.getmCameraSource().takePicture(shutterCallback, pictureCallback);
+
+                mCameraHelper.getmCameraSource().takePicture(null, pictureCallback);
+                manageRetryPhotoVisibility(true);
+
+                //TODO do przemyślenia:
+          /*      if(StringUtils.isEmpty(flowMemory.getEncodedPhoto())){
+                    mCameraHelper.getmCameraSource().takePicture(null, pictureCallback);
+                    manageRetryPhotoVisibility(true);
+                }else{
+                    showOverwritePhotoDialog();
+                }*/
                 break;
             case R.id.fab_retake_photo:
                 if (mCameraHelper != null) {
                     mCameraHelper.startCameraSource();
+                    manageRetryPhotoVisibility(false);
                 }
                 break;
         }
@@ -113,21 +126,46 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         public void onPictureTaken(byte[] bytes) {
             Log.d(TAG, "onPictureTaken::bytes::" + bytes.toString());
             flowMemory.setEncodedPhoto(PhotoHelper.encodePhotoBytes(bytes));
+            mCameraHelper.stopCameraSource();
         }
     };
 
     CameraSource.ShutterCallback shutterCallback = new CameraSource.ShutterCallback() {
         @Override
         public void onShutter() {
-            mCameraHelper.stopCameraSource();
+
         }
     };
 
+    //TODO style this dialog appropriately. Probably crete new DialogFragment here
+    private void showOverwritePhotoDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.overwrite_photo)
+                .setTitle(R.string.photo)
+                .setIcon(R.drawable.take_photo)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mCameraHelper.getmCameraSource().takePicture(shutterCallback, pictureCallback);
+                        manageRetryPhotoVisibility(true);
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-    //TODO check situation when photo is taken. If is then show the photo
-    private void checkIfPhotoIsTaken(){
-        if(!StringUtils.isEmpty(flowMemory.getEncodedPhoto())){
 
-        }
+        AlertDialog dialog_card = alert.create();
+
+        dialog_card.getWindow().setGravity(Gravity.BOTTOM);
+        dialog_card.show();
     }
+
+    private void manageRetryPhotoVisibility(boolean makeVisible){
+        binding.fabRetakePhoto.setVisibility(makeVisible?View.VISIBLE:View.INVISIBLE);
+    }
+
 }

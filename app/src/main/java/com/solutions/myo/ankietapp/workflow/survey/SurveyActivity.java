@@ -115,6 +115,7 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
         switch(id){
             case R.id.bt_next:
                 processState(BaseStateManager.EVENT_NEXT);
+                Log.d(TAG,  "data in flowmemory: " + flowMemory.toString());
                 break;
             case R.id.bt_prev:
                 processState(BaseStateManager.EVENT_PREVIOUS);

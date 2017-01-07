@@ -157,6 +157,9 @@ public class CameraHelper extends PermissionsHelper {
     }
 
 
+    public CameraSourcePreview getmCameraSourcePreview() {
+        return mCameraSourcePreview;
+    }
 
     public CameraSource getmCameraSource() {
         return mCameraSource;
