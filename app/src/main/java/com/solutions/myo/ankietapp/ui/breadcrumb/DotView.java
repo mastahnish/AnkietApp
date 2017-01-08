@@ -70,6 +70,7 @@ final class DotView extends RelativeLayout {
         .animate()
         .scaleX(1)
         .scaleY(1)
+            .setDuration(10)
         .withEndAction(endAnim);
   }
 
@@ -78,6 +79,7 @@ final class DotView extends RelativeLayout {
         .animate()
         .scaleX(0)
         .scaleY(0)
+            .setDuration(10)
         .withEndAction(endAnim);
   }
 }

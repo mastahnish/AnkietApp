@@ -68,6 +68,7 @@ final class SeparatorView extends RelativeLayout {
     separatorViewVisitedStep
         .animate()
         .scaleX(1)
+            .setDuration(10)
         .withEndAction(endAnim);
   }
 
@@ -75,6 +76,7 @@ final class SeparatorView extends RelativeLayout {
     separatorViewVisitedStep
         .animate()
         .scaleX(0)
+            .setDuration(10)
         .withEndAction(endAnim);
   }
 }

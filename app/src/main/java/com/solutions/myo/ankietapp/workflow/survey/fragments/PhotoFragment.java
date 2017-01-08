@@ -42,6 +42,9 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false);
         binding.setClickListener(this);
+
+        flowMemory = ((ISurveyHolder) getActivity()).getSurveyFlowMemory();
+
         mCameraHelper = new CameraHelper(getActivity(), binding.faceOverlay, binding.cameraPreview, this);
 
         int rc = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
@@ -52,11 +55,10 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
             mCameraHelper.requestCameraPermission();
         }
 
-        flowMemory = ((ISurveyHolder) getActivity()).getSurveyFlowMemory();
-
         View root = binding.getRoot();
         return root;
     }
+
 
     @Override
     public void onResume() {
