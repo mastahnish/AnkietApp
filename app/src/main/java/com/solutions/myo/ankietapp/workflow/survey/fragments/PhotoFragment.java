@@ -16,16 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.face.Face;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.databinding.FragmentPhotoBinding;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
 import com.solutions.myo.ankietapp.workflow.survey.camera.photo.PhotoHelper;
 import com.solutions.myo.ankietapp.workflow.survey.camera.ui.CameraHelper;
+import com.solutions.myo.ankietapp.workflow.survey.camera.ui.IFaceListener;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyFlowMemory;
 
 
-public class PhotoFragment extends Fragment implements IPermissionsListener, View.OnClickListener {
+public class PhotoFragment extends Fragment implements IPermissionsListener, View.OnClickListener, IFaceListener {
 
     private static final String TAG = PhotoFragment.class.getSimpleName();
 
@@ -40,7 +42,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false);
         binding.setClickListener(this);
-        mCameraHelper = new CameraHelper(getActivity(), binding.faceOverlay, binding.cameraPreview);
+        mCameraHelper = new CameraHelper(getActivity(), binding.faceOverlay, binding.cameraPreview, this);
 
         int rc = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
@@ -168,4 +170,8 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         binding.fabRetakePhoto.setVisibility(makeVisible?View.VISIBLE:View.INVISIBLE);
     }
 
+    @Override
+    public void onFaceUpdated(Face face) {
+        binding.happinessMeasure.setProgress(Math.round(face.getIsSmilingProbability()*100));
+    }
 }

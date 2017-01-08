@@ -27,10 +27,13 @@ public class CameraHelper extends PermissionsHelper {
     private CameraSource mCameraSource;
     private CameraSourcePreview mCameraSourcePreview;
 
-    public CameraHelper(Context context, GraphicOverlay graphicOverlay, CameraSourcePreview cameraSourcePreview) {
+    private IFaceListener faceListener;
+
+    public CameraHelper(Context context, GraphicOverlay graphicOverlay, CameraSourcePreview cameraSourcePreview, IFaceListener faceListener) {
         super(context, graphicOverlay);
         this.mContext = context;
         this.mCameraSourcePreview = cameraSourcePreview;
+        this.faceListener = faceListener;
 
     }
 
@@ -102,7 +105,8 @@ public class CameraHelper extends PermissionsHelper {
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             mOverlay.add(mFaceGraphic);
-            mFaceGraphic.updateFace(face);
+//            mFaceGraphic.updateFace(face);
+            faceListener.onFaceUpdated(face);
         }
 
         /**
