@@ -43,5 +43,8 @@
     <string name="no">Nie</string>
     <string name="happiness_measurement">Pomiar uśmiechu</string>
 
+    <string name="finish_survey">Zakończ</string>
+    <string name="finish_survey_question">Czy chcesz zakończyć ankietę?</string>
+
 
 </resources>

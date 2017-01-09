@@ -244,7 +244,7 @@ public class SurveyStateManager extends BaseStateManager{
         }
     }
 
-    private class SendSurveyState extends BaseState {
+    public class SendSurveyState extends BaseState {
 
         @Override
         public void enter() {

@@ -134,12 +134,6 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         }
     };
 
-    CameraSource.ShutterCallback shutterCallback = new CameraSource.ShutterCallback() {
-        @Override
-        public void onShutter() {
-
-        }
-    };
 
     //TODO style this dialog appropriately. Probably crete new DialogFragment here
     private void showOverwritePhotoDialog() {
@@ -150,7 +144,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mCameraHelper.getmCameraSource().takePicture(shutterCallback, pictureCallback);
+                        mCameraHelper.getmCameraSource().takePicture(null, pictureCallback);
                         manageRetryPhotoVisibility(true);
                     }
                 })

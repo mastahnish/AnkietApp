@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import com.solutions.myo.ankietapp.R;
@@ -18,6 +19,7 @@ import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissio
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyDataManager;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyFlowMemory;
+import com.solutions.myo.ankietapp.workflow.survey.fragments.SendSurveyFragment;
 import com.solutions.myo.ankietapp.workflow.survey.state.SurveyStateManager;
 
 import static com.solutions.myo.ankietapp.workflow.survey.camera.config.GMSConfig.RC_HANDLE_CAMERA_PERM;
@@ -114,7 +116,12 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
 
         switch(id){
             case R.id.bt_next:
-                processState(BaseStateManager.EVENT_NEXT);
+                if(mState instanceof SurveyStateManager.SendSurveyState){
+                    showFinishProcess();
+                }else{
+                    processState(BaseStateManager.EVENT_NEXT);
+                }
+
                 Log.d(TAG,  "data in flowmemory: " + flowMemory.toString());
                 break;
             case R.id.bt_prev:
@@ -175,5 +182,30 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
         return getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
     }
 
+
+    private void showFinishProcess() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this)
+                .setMessage(R.string.finish_survey_question)
+                .setTitle(R.string.finish_survey)
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        processState(BaseStateManager.EVENT_NEXT);
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+        AlertDialog dialog_card = alert.create();
+
+        dialog_card.getWindow().setGravity(Gravity.CENTER);
+        dialog_card.show();
+    }
 
 }
