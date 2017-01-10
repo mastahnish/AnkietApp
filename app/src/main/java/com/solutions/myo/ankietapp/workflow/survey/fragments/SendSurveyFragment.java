@@ -1,6 +1,7 @@
 package com.solutions.myo.ankietapp.workflow.survey.fragments;
 
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.databinding.FragmentSendSurveyBinding;
+import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 
 import java.util.Date;
@@ -35,6 +37,12 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
 
         switch (id){
             case R.id.btnSendSurvey:
+                Activity ac = getActivity();
+                if(ac!=null){
+                    ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logSendSurveyClickedEvent();
+                }
+
+
                 Date currentDate = new Date(System.currentTimeMillis());
                 ((ISurveyHolder) getActivity()).getSurveyFlowMemory().setSurveyDate(currentDate);
 

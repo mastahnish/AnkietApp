@@ -10,7 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener{
@@ -87,9 +89,17 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
 
+
+    private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalyticsHelper = new FirebaseAnalyticsHelper(mFirebaseAnalytics);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
 
@@ -168,6 +178,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 toggle();
                 break;
             case R.id.start_button:
+                mFirebaseAnalyticsHelper.logStartButtonClickedEvent();
                 navigateNext();
                 break;
 

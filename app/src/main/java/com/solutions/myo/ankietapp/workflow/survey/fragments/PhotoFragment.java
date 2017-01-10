@@ -2,15 +2,13 @@ package com.solutions.myo.ankietapp.workflow.survey.fragments;
 
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.face.Face;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.databinding.FragmentPhotoBinding;
+import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
 import com.solutions.myo.ankietapp.workflow.survey.camera.photo.PhotoHelper;
 import com.solutions.myo.ankietapp.workflow.survey.camera.ui.CameraHelper;
@@ -101,12 +100,18 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
     @Override
     public void onClick(View v) {
         int id = v.getId();
-
+        Activity ac = getActivity();
         switch (id) {
             case R.id.fab_take_photo:
 
+                if(ac!=null){
+                    ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logTakePhotoClickedEvent();
+                }
+
                 mCameraHelper.getmCameraSource().takePicture(null, pictureCallback);
                 manageRetryPhotoVisibility(true);
+
+
 
                 //TODO do przemyślenia:
           /*      if(StringUtils.isEmpty(flowMemory.getEncodedPhoto())){
@@ -115,12 +120,20 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
                 }else{
                     showOverwritePhotoDialog();
                 }*/
+
                 break;
             case R.id.fab_retake_photo:
+                if(ac!=null){
+                    ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logRetakePhotoClickedEvent();
+                }
+
+
                 if (mCameraHelper != null) {
                     mCameraHelper.startCameraSource();
                     manageRetryPhotoVisibility(false);
                 }
+
+
                 break;
         }
     }
@@ -134,9 +147,21 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         }
     };
 
+    private void manageRetryPhotoVisibility(boolean makeVisible){
+        binding.fabRetakePhoto.setVisibility(makeVisible?View.VISIBLE:View.INVISIBLE);
+    }
 
+    @Override
+    public void onFaceUpdated(Face face) {
+        binding.happinessMeasure.setProgress(Math.round(face.getIsSmilingProbability()*100));
+    }
+
+
+
+
+    //TODO do przemyślenia:
     //TODO style this dialog appropriately. Probably crete new DialogFragment here
-    private void showOverwritePhotoDialog() {
+   /* private void showOverwritePhotoDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.overwrite_photo)
                 .setTitle(R.string.photo)
@@ -160,14 +185,5 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
         dialog_card.getWindow().setGravity(Gravity.BOTTOM);
         dialog_card.show();
-    }
-
-    private void manageRetryPhotoVisibility(boolean makeVisible){
-        binding.fabRetakePhoto.setVisibility(makeVisible?View.VISIBLE:View.INVISIBLE);
-    }
-
-    @Override
-    public void onFaceUpdated(Face face) {
-        binding.happinessMeasure.setProgress(Math.round(face.getIsSmilingProbability()*100));
-    }
+    }*/
 }

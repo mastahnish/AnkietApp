@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.databinding.ActivitySurveyBinding;
 import com.solutions.myo.ankietapp.ui.breadcrumb.IAnimationListener;
@@ -19,7 +21,6 @@ import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissio
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyDataManager;
 import com.solutions.myo.ankietapp.workflow.survey.data.SurveyFlowMemory;
-import com.solutions.myo.ankietapp.workflow.survey.fragments.SendSurveyFragment;
 import com.solutions.myo.ankietapp.workflow.survey.state.SurveyStateManager;
 
 import static com.solutions.myo.ankietapp.workflow.survey.camera.config.GMSConfig.RC_HANDLE_CAMERA_PERM;
@@ -38,9 +39,16 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
 
     private SurveyDataManager surveyDataManager;
 
+    private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalyticsHelper = new FirebaseAnalyticsHelper(mFirebaseAnalytics);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_survey);
         binding.setClickListener(this);
 
@@ -206,6 +214,11 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
 
         dialog_card.getWindow().setGravity(Gravity.CENTER);
         dialog_card.show();
+    }
+
+
+    public FirebaseAnalyticsHelper getmFirebaseAnalyticsHelper() {
+        return mFirebaseAnalyticsHelper;
     }
 
 }

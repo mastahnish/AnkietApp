@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.databinding.ActivityLoginBinding;
 import com.solutions.myo.ankietapp.workflow.menu.MenuActivity;
 
@@ -30,11 +32,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final int REQUEST_READ_CONTACTS = 0;
 
-
+    private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalyticsHelper = new FirebaseAnalyticsHelper(mFirebaseAnalytics);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         populateAutoComplete();
 
@@ -197,12 +204,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch(id){
             case R.id.email_sign_in_button:
+                mFirebaseAnalyticsHelper.logLoginButtonClickedEvent();
                 attemptLogin();
                 break;
             //TODO some other options for login like Facebook or so
         }
 
     }
+
 
 }
 

@@ -17,5 +17,9 @@ public class AnkietAppApplication extends MultiDexApplication {
         super.onCreate();
 
         FontOverrideHelper.setCustomFonts(getApplicationContext());
+
     }
+
+
+
 }
