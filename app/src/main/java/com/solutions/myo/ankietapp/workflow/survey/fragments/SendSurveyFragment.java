@@ -14,6 +14,7 @@ import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentSendSurveyBinding;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
+import com.solutions.myo.ankietapp.workflow.survey.data.SurveyFlowMemory;
 
 import java.util.Date;
 
@@ -23,11 +24,14 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
 
     private FragmentSendSurveyBinding binding;
 
+    private SurveyFlowMemory flowMemory;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_send_survey, container, false);
         binding.setClickListener(this);
+        flowMemory = ((ISurveyHolder) getActivity()).getSurveyFlowMemory();
         View root = binding.getRoot();
         return root;
     }
@@ -46,7 +50,7 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
 
 
                 Date currentDate = new Date(System.currentTimeMillis());
-                ((ISurveyHolder) getActivity()).getSurveyFlowMemory().setSurveyDate(currentDate);
+                flowMemory.setSurveyDate(currentDate);
 
                 ((ISurveyHolder) getActivity()).getSurveyDataManager().sendSurvey();
 
