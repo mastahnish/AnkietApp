@@ -51,12 +51,24 @@
                 android:text="@string/happiness_measurement"
                 android:textAlignment="center" />
 
-            <ProgressBar
+            <com.eugeneek.smilebar.SmileBar
                 android:id="@+id/happinessMeasure"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/question" />
+                android:layout_below="@id/question"
+                android:layout_centerInParent="true"
+                app:enabled="false"
+                app:horizontalSpacing="8dp"
+                app:rating="0"
+                app:smileDefault="@android:color/transparent"
+                app:smileHeight="60dp"
+                app:smileRate1="@drawable/rating1"
+                app:smileRate2="@drawable/rating2"
+                app:smileRate3="@drawable/rating3"
+                app:smileRate4="@drawable/rating4"
+                app:smileRate5="@drawable/rating5"
+                app:smileWidth="60dp" />
+
 
         </RelativeLayout>
 

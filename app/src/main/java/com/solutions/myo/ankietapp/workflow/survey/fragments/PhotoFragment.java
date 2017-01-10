@@ -158,10 +158,20 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
     @Override
     public void onFaceUpdated(Face face) {
-        binding.happinessMeasure.setProgress(Math.round(face.getIsSmilingProbability()*100));
+
+        final int currentHappiness = Math.round(face.getIsSmilingProbability()*5);
+        LogHelper.log(TAG, "::onFaceUpdated:: "  + String.valueOf(currentHappiness),  false);
+
+        if(currentHappiness>=0 && currentHappiness != binding.happinessMeasure.getRating()) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    binding.happinessMeasure.setRating(currentHappiness);
+                }
+            });
+        }
+
     }
-
-
 
 
     //TODO do przemyślenia:
