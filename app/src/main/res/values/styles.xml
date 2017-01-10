@@ -6,13 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@style/ankietapp_white_button_text</item>
+        <item name="android:textViewStyle">@style/ankietapp_white_text</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:textViewStyle">@style/ankietapp_white_button_text</item>
+        <item name="android:textViewStyle">@style/ankietapp_white_text</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -39,6 +39,12 @@
         <item name="android:layout_marginBottom">12dp</item>
         <item name="android:background">@drawable/hint_btn_background_accent</item>
         <item name="android:textAppearance">@style/ankietapp_white_button_text</item>
+    </style>
+
+    <style name="ankietapp_white_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primaryWhite</item>
     </style>
 
     <style name="ankietapp_white_button_text" parent="ankietapp_font_text_style">

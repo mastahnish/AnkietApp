@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.face.Face;
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentPhotoBinding;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;
@@ -48,9 +49,11 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
         int rc = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
+            binding.fabTakePhoto.setVisibility(View.VISIBLE);
             mCameraHelper.createCameraSource();
         } else {
-            Log.w(TAG, "Need to request camera permissions! ~Jacek");
+            LogHelper.log(Log.WARN, TAG, "Need to request camera permissions! ~Jacek", true);
+            binding.fabTakePhoto.setVisibility(View.GONE);
             mCameraHelper.requestCameraPermission();
         }
 
@@ -87,6 +90,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
     @Override
     public void onPermissionGranted() {
         if (mCameraHelper != null) {
+            binding.fabTakePhoto.setVisibility(View.VISIBLE);
             mCameraHelper.createCameraSource();
 //            mCameraHelper.startCameraSource();
         }
@@ -94,7 +98,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
     @Override
     public void onPermissionRejected() {
-
+        binding.fabTakePhoto.setVisibility(View.GONE);
     }
 
     @Override
@@ -103,7 +107,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         Activity ac = getActivity();
         switch (id) {
             case R.id.fab_take_photo:
-
+                LogHelper.log(TAG, "onClick::take_photo::", true);
                 if(ac!=null){
                     ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logTakePhotoClickedEvent();
                 }
@@ -123,6 +127,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
 
                 break;
             case R.id.fab_retake_photo:
+                LogHelper.log(TAG, "onClick::retake_photo::", true);
                 if(ac!=null){
                     ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logRetakePhotoClickedEvent();
                 }
@@ -141,7 +146,7 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
     CameraSource.PictureCallback pictureCallback = new CameraSource.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] bytes) {
-            Log.d(TAG, "onPictureTaken::bytes::" + bytes.toString());
+            LogHelper.log(TAG, "onPictureTaken::bytes::" + bytes.toString(), true);
             flowMemory.setEncodedPhoto(PhotoHelper.encodePhotoBytes(bytes));
             mCameraHelper.stopCameraSource();
         }

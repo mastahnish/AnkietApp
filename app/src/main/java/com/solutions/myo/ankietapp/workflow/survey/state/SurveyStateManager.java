@@ -2,9 +2,9 @@ package com.solutions.myo.ankietapp.workflow.survey.state;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.workflow.survey.fragments.PhotoFragment;
 import com.solutions.myo.ankietapp.workflow.survey.fragments.QuestionFragment;
@@ -69,7 +69,7 @@ public class SurveyStateManager extends BaseStateManager{
 
         @Override
         public void enter() {
-            Log.d(TAG, "mActivity.getString(R.string.question_first): " + mActivity.getString(R.string.question_first));
+            LogHelper.log(TAG, "mActivity.getString(R.string.question_first): " + mActivity.getString(R.string.question_first), false);
             addNewFragment(new QuestionFragment(), QuestionFragment.generateArgument(mActivity.getString(R.string.question_first),1));
         }
 

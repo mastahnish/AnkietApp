@@ -14,6 +14,7 @@ import android.view.View;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.databinding.ActivitySurveyBinding;
 import com.solutions.myo.ankietapp.ui.breadcrumb.IAnimationListener;
@@ -124,15 +125,18 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
 
         switch(id){
             case R.id.bt_next:
+                LogHelper.log(TAG, " moving NEXT::data in flowmemory: " + flowMemory.toString(), true);
+
                 if(mState instanceof SurveyStateManager.SendSurveyState){
-                    showFinishProcess();
+                    showFinishSurveyProcess();
                 }else{
                     processState(BaseStateManager.EVENT_NEXT);
                 }
 
-                Log.d(TAG,  "data in flowmemory: " + flowMemory.toString());
                 break;
             case R.id.bt_prev:
+                LogHelper.log(TAG, " moving PREVIOUS", true);
+
                 processState(BaseStateManager.EVENT_PREVIOUS);
                 break;
         }
@@ -151,13 +155,13 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode != RC_HANDLE_CAMERA_PERM) {
-            Log.d(TAG, "Got unexpected permission result: " + requestCode);
+            LogHelper.log(TAG, "Got unexpected permission result: " + requestCode, true);
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             return;
         }
 
         if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "Camera permission granted - initialize the camera source");
+            LogHelper.log(TAG, "Camera permission granted - initialize the camera source", true);
             // we have permission, so create the camerasource
             if(getCurrentFragment() instanceof IPermissionsListener){
                 ((IPermissionsListener) getCurrentFragment()).onPermissionGranted();
@@ -191,7 +195,7 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
     }
 
 
-    private void showFinishProcess() {
+    private void showFinishSurveyProcess() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this)
                 .setMessage(R.string.finish_survey_question)
                 .setTitle(R.string.finish_survey)
@@ -199,12 +203,14 @@ public class SurveyActivity extends AppCompatActivity implements BaseStateManage
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LogHelper.log(TAG, "showFinishSurveyProcess::yes_clicked::", true);
                         processState(BaseStateManager.EVENT_NEXT);
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LogHelper.log(TAG, "showFinishSurveyProcess::no_clicked::", true);
                         dialog.dismiss();
                     }
                 });

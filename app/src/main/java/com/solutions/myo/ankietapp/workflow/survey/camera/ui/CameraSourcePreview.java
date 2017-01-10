@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 
 import java.io.IOException;
 
@@ -160,7 +161,7 @@ public class CameraSourcePreview extends ViewGroup {
         try {
             startIfReady();
         } catch (IOException e) {
-            Log.e(TAG, "Could not start camera source.", e);
+            LogHelper.log(TAG, "Could not start camera source.", true, e);
         }
     }
 
@@ -173,7 +174,7 @@ public class CameraSourcePreview extends ViewGroup {
             return true;
         }
 
-        Log.d(TAG, "isPortraitMode returning false by default");
+        LogHelper.log(TAG, "isPortraitMode returning false by default", true);
         return false;
     }
 }

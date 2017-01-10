@@ -4,13 +4,13 @@ package com.solutions.myo.ankietapp.workflow.survey.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.eugeneek.smilebar.SmileBar;
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentQuestionBinding;
 import com.solutions.myo.ankietapp.objects.Question;
 import com.solutions.myo.ankietapp.utils.StringUtils;
@@ -35,7 +35,7 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
     private Question cachedQuestion;
 
     public static Bundle generateArgument(String question, int number) {
-        Log.d(TAG, "getInstance::question:: " + question );
+        LogHelper.log(TAG, "getInstance::question:: " + question, true);
         Bundle arg = new Bundle();
         arg.putString(QUESTION_TEXT_KEY, question);
         arg.putInt(QUESTION_NUMBER_KEY, number);
@@ -46,7 +46,7 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false);
-        Log.d(TAG, "onCreateView!");
+        LogHelper.log(TAG, "onCreateView!", false);
 
         Bundle arg = getArguments();
 
@@ -55,7 +55,7 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
         question = new Question();
 
         if(!StringUtils.isEmpty(questionString)){
-            Log.d(TAG, "getQuestion()!=null");
+            LogHelper.log(TAG, "getQuestion()!=null", false);
             binding.questionContent.question.setText(questionString);
             binding.questionContent.starBar.setOnRatingSliderChangeListener(this);
             question.setDescription(questionString);
@@ -78,7 +78,6 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
 
         if(arg !=null){
             question = arg.getString(QUESTION_TEXT_KEY);
-            Log.d(TAG, "getQuestion: question : " + question);
         }
 
         return question ;
@@ -89,7 +88,7 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
 
         if(arg !=null){
             number = arg.getInt(QUESTION_NUMBER_KEY);
-            Log.d(TAG, "getQuestion: questionNumber : " + questionNumber);
+            LogHelper.log(TAG, "getQuestion: questionNumber : " + questionNumber, true);
         }
         return number;
     }
@@ -124,12 +123,12 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
 
     @Override
     public void onPendingRating(int i) {
-        Log.d(TAG, "onPendingRating!");
+        LogHelper.log(TAG, "onPendingRating!", false);
     }
 
     @Override
     public void onFinalRating(int i) {
-        Log.d(TAG, "onFinalRating!:: i : " + i );
+        LogHelper.log(TAG, "onFinalRating!:: i : " + i, true);
         if(question!=null){
             question.setRating(i);
             question.setCompleted(i!=0);
@@ -140,7 +139,8 @@ public class QuestionFragment extends Fragment implements SmileBar.OnRatingSlide
 
     @Override
     public void onCancelRating() {
-        Log.d(TAG, "onCancelRating!");
+        //zrobiłem na true żeby wkońcu się dowiedzieć kiedy występuje onCancelRating()
+        LogHelper.log(TAG, "onCancelRating!", true);
 
     }
 

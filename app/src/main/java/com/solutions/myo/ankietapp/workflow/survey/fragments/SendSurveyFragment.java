@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.solutions.myo.ankietapp.R;
+import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentSendSurveyBinding;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.data.ISurveyHolder;
@@ -37,6 +38,7 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
 
         switch (id){
             case R.id.btnSendSurvey:
+                LogHelper.log(TAG, "onClick::send_survey::", true);
                 Activity ac = getActivity();
                 if(ac!=null){
                     ((SurveyActivity) ac).getmFirebaseAnalyticsHelper().logSendSurveyClickedEvent();
