@@ -147,8 +147,10 @@ public class PhotoFragment extends Fragment implements IPermissionsListener, Vie
         @Override
         public void onPictureTaken(byte[] bytes) {
             LogHelper.log(TAG, "onPictureTaken::bytes::" + bytes.toString(), true);
-            flowMemory.setEncodedPhoto(PhotoHelper.encodePhotoBytes(bytes));
             mCameraHelper.stopCameraSource();
+            flowMemory.setSmileMeasurement(binding.happinessMeasure.getRating());
+            flowMemory.setEncodedPhoto(PhotoHelper.encodePhotoBytes(bytes));
+
         }
     };
 
