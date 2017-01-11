@@ -37,7 +37,7 @@
             android:name=".workflow.menu.MenuActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".workflow.login.SplashActivity"
+            android:name=".workflow.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

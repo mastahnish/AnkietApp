@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "125313494686-nqraqof9p033908u540ep14h67sogtij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solutions.myo.ankietapp",
+            "certificate_hash": "35CF55917B725FD3AC35C1F578C3F937F6F0EB45"
+          }
+        },
+        {
           "client_id": "125313494686-7n2fn0om0guarrlqlg661d2oqubtf2eg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

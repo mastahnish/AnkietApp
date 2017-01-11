@@ -30,6 +30,21 @@ public class FirebaseAnalyticsHelper {
         mFirebaseAnalytics.logEvent(IFirebaseAnalytics.IEvent.LOGIN_BUTTON_CLICKED, bundle);
     }
 
+    public void logSignUpButtonClickedEvent() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, IFirebaseAnalytics.ILocation.LOGIN);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, IFirebaseAnalytics.IButtons.SIGN_UP);
+        mFirebaseAnalytics.logEvent(IFirebaseAnalytics.IEvent.SIGN_UP_BUTTON_CLICKED, bundle);
+    }
+
+    public void logSignOutButtonClickedEvent() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, IFirebaseAnalytics.ILocation.MENU);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, IFirebaseAnalytics.IButtons.SIGN_OUT);
+        mFirebaseAnalytics.logEvent(IFirebaseAnalytics.IEvent.SIGN_OUT_BUTTON_CLICKED, bundle);
+    }
+
+
     public void logAnalyzeButtonClickedEvent() {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.LOCATION, IFirebaseAnalytics.ILocation.MENU);

@@ -28,6 +28,16 @@
             android:id="@+id/content_menu"
             layout="@layout/content_menu" />
 
+            <Button
+                android:id="@+id/email_sign_out_button"
+                style="@style/AnkietAppLoginButton"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_sign_out"
+                android:textStyle="bold" />
+
         </RelativeLayout>
 
 
