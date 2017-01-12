@@ -3,12 +3,10 @@ package com.solutions.myo.ankietapp.workflow.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -21,27 +19,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseUser;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.common.BaseActivity;
+import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityLoginBinding;
-import com.solutions.myo.ankietapp.workflow.menu.MenuActivity;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private ActivityLoginBinding binding;
-
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -49,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private View focusView;
     private String email;
     private String password;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,49 +68,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         binding.emailSignInButton.setOnClickListener(this);
         binding.emailSignUpButton.setOnClickListener(this);
 
-        initializeFirebaseAuth();
+        createLoginDataManager();
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         showProgress(false);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mAuthListener!=null){
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    private void initializeFirebaseAuth(){
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    LogHelper.log(TAG, "onAuthStateChanged:signed_in:" + user.getUid(), true);
-                    navigateNext();
-                    //TODO save user in SQLite
-                } else {
-                    // User is signed out
-                    LogHelper.log(TAG, "onAuthStateChanged:signed_out", true);
-
-                }
-                showProgress(false);
-            }
-        };
     }
 
     private boolean validateCredentials(){
@@ -152,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void attemptLogin() {
-
+        LogHelper.log(TAG, "attemptLogin:",true);
         if (!validateCredentials()) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -165,32 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void proceedWithLogin() {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(LoginActivity.this, R.string.auth_failed,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
-                    }
-                })
-                .addOnFailureListener(this, failureListener);
-
-
-    }
-
     private void attemptSignUp() {
-
+        LogHelper.log(TAG, "attemptSignUp:",true);
         if (!validateCredentials()) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -204,26 +140,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogHelper.log(TAG, "::onStart!", true);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogHelper.log(TAG, "::onStop!", true);
+    }
+
+    private void proceedWithLogin() {
+        LogHelper.log(TAG, "proceedWithLogin:",true);
+        setAuthAction(IAuthAction.SIGN_IN);
+        getFirebaseAuth().signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, completeListener)
+                .addOnFailureListener(this, failureListener);
+
+
+    }
+
     private void createAccount(){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        LogHelper.log(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful(),true);
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, R.string.auth_failed,
-                                    Toast.LENGTH_SHORT).show();
-
-                            showProgress(false);
-                        }
-                    }
-                })
+        LogHelper.log(TAG, "createAccount:",true);
+        setAuthAction(IAuthAction.SIGN_UP);
+        getFirebaseAuth().createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, completeListener)
                 .addOnFailureListener(this, failureListener);
     }
+
+    //FIXME not needed for now
+    @Deprecated
+    OnCompleteListener completeListener = new OnCompleteListener() {
+        @Override
+        public void onComplete(@NonNull Task task) {
+            LogHelper.log(TAG, "onCompleteListener:" + task.isSuccessful(),true);
+
+            // If sign in fails, display a message to the user. If sign in succeeds
+            // the auth state listener will be notified and logic to handle the
+            // signed in user can be handled in the listener.
+            if (!task.isSuccessful()) {
+                Log.w(TAG, "signInWithEmail:failed", task.getException());
+                Toast.makeText(LoginActivity.this, R.string.auth_failed,
+                        Toast.LENGTH_SHORT).show();
+                showProgress(false);
+            }
+        }
+    };
 
     OnFailureListener failureListener = new OnFailureListener() {
         @Override
@@ -257,11 +221,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showProgress(false);
         }
     };
-
-    private void navigateNext() {
-        Intent myIntent = new Intent(this, MenuActivity.class);
-        startActivity(myIntent);
-    }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -323,7 +282,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
-
 
 }
 

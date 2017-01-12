@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.face.Face;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentPhotoBinding;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 import com.solutions.myo.ankietapp.workflow.survey.camera.permissions.IPermissionsListener;

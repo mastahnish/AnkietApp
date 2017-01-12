@@ -2,7 +2,7 @@ package com.solutions.myo.ankietapp;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.utils.FontOverrideHelper;
 
 public class AnkietAppApplication extends MultiDexApplication {

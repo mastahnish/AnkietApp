@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 
 import java.io.IOException;
 

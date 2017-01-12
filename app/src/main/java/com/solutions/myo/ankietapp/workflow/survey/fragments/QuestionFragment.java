@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.eugeneek.smilebar.SmileBar;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.databinding.FragmentQuestionBinding;
 import com.solutions.myo.ankietapp.objects.Question;
 import com.solutions.myo.ankietapp.utils.StringUtils;

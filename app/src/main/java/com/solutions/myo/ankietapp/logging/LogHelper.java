@@ -1,4 +1,4 @@
-package com.solutions.myo.ankietapp.analytics.logging;
+package com.solutions.myo.ankietapp.logging;
 
 import android.content.Context;
 import android.util.Log;

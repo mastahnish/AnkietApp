@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.workflow.survey.fragments.PhotoFragment;
 import com.solutions.myo.ankietapp.workflow.survey.fragments.QuestionFragment;

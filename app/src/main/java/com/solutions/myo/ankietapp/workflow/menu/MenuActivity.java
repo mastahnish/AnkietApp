@@ -3,21 +3,19 @@ package com.solutions.myo.ankietapp.workflow.menu;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
-import com.solutions.myo.ankietapp.analytics.logging.LogHelper;
+import com.solutions.myo.ankietapp.common.BaseActivity;
+import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityMenuBinding;
-import com.solutions.myo.ankietapp.workflow.login.LoginActivity;
+import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 
-public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
+public class MenuActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MenuActivity.class.getSimpleName();
 
@@ -25,9 +23,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
     private FirebaseAnalytics mFirebaseAnalytics;
-
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +34,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalyticsHelper = new FirebaseAnalyticsHelper(mFirebaseAnalytics);
 
-
-        initializeFirebaseAuth();
         updateUserInfo();
 
 
     }
 
     private void updateUserInfo() {
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = getFirebaseAuth().getCurrentUser();
 
         binding.contentMenu.userEmail.setText(String.format(getString(R.string.user_email), user.getEmail()));
         binding.contentMenu.userUid.setText(String.format(getString(R.string.user_uid), user.getUid()));
@@ -56,33 +49,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         LogHelper.log(TAG, "::user image: " + user.getPhotoUrl(), true);
     }
 
-    private void initializeFirebaseAuth(){
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    LogHelper.log(TAG, "onAuthStateChanged:signed_out", true);
-                    navigateToLogin();
-                }
-            }
-        };
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mAuthListener!=null){
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -99,18 +65,27 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.email_sign_out_button:
                 mFirebaseAnalyticsHelper.logSignOutButtonClickedEvent();
-                mAuth.signOut();
+                setAuthAction(IAuthAction.SIGN_OUT);
+                getFirebaseAuth().signOut();
                 break;
         }
 
     }
 
-    private void navigateToLogin() {
-        Intent myIntent = new Intent(this, LoginActivity.class);
-        startActivity(myIntent);
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogHelper.log(TAG, "::onStart!", true);
     }
 
-    private void navigateToAnalytics() {
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogHelper.log(TAG, "::onStop!", true);
+    }
+
+     private void navigateToAnalytics() {
         //TODO make analytics
     }
 
