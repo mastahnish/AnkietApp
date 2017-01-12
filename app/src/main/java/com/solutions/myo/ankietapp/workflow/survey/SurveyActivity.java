@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
+import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.common.BaseStateManager;
 import com.solutions.myo.ankietapp.databinding.ActivitySurveyBinding;

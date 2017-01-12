@@ -8,7 +8,7 @@ import android.view.View;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseUser;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
+import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.common.BaseActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityMenuBinding;

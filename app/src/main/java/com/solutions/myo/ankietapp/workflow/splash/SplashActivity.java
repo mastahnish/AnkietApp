@@ -12,7 +12,7 @@ import android.view.Window;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
+import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.databinding.ActivitySplashBinding;
 import com.solutions.myo.ankietapp.workflow.login.LoginActivity;
 

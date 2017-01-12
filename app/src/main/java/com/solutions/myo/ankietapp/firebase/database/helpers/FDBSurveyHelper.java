@@ -1,4 +1,4 @@
-package com.solutions.myo.ankietapp.firebase.helpers;
+package com.solutions.myo.ankietapp.firebase.database.helpers;
 
 /**
  * All methods to manipulate surveys will be here

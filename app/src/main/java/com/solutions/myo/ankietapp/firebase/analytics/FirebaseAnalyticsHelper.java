@@ -1,4 +1,4 @@
-package com.solutions.myo.ankietapp.analytics;
+package com.solutions.myo.ankietapp.firebase.analytics;
 
 import android.os.Bundle;
 

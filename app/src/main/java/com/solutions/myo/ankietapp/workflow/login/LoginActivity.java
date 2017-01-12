@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.analytics.FirebaseAnalyticsHelper;
+import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.common.BaseActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityLoginBinding;

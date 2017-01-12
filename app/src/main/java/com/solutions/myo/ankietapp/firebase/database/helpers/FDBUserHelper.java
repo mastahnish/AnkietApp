@@ -1,12 +1,12 @@
-package com.solutions.myo.ankietapp.firebase.helpers;
+package com.solutions.myo.ankietapp.firebase.database.helpers;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.solutions.myo.ankietapp.logging.LogHelper;
-import com.solutions.myo.ankietapp.firebase.IFirebaseStorage;
-import com.solutions.myo.ankietapp.firebase.data.User;
+import com.solutions.myo.ankietapp.firebase.database.IFirebaseStorage;
+import com.solutions.myo.ankietapp.firebase.database.data.User;
 
 /**
  * All methods to work with users will be here

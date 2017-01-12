@@ -1,4 +1,4 @@
-package com.solutions.myo.ankietapp.firebase.data;
+package com.solutions.myo.ankietapp.firebase.database.data;
 
 /**
  * Created by Jacek on 2017-01-12.
