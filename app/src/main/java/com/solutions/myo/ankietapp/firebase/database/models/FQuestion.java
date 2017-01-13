@@ -1,9 +1,9 @@
 package com.solutions.myo.ankietapp.firebase.database.models;
 
 import com.google.firebase.database.Exclude;
-import com.solutions.myo.ankietapp.firebase.database.IFirebaseStorage;
+import com.solutions.myo.ankietapp.firebase.database.utils.ConvertHelper;
+import com.solutions.myo.ankietapp.objects.Question;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,13 +28,13 @@ public class FQuestion {
     }
 
     @Exclude
-    public Map<String, Object> toMap(/*Question question*/) {
-        HashMap<String, Object> result = new HashMap<>();
+    public Map<String, Object> toMap(Question question) {
+/*        HashMap<String, Object> result = new HashMap<>();
         result.put(IFirebaseStorage.IQuestion.DESCRIPTION, description);
         result.put(IFirebaseStorage.IQuestion.QUESTION_NUMBER, String.valueOf(questionNumber));
         result.put(IFirebaseStorage.IQuestion.RATING, String.valueOf(rating));
         result.put(IFirebaseStorage.IQuestion.COMPLETED, String.valueOf(completed));
-        return result;
-//        return ConvertHelper.convertObjectToProperty(question);
+        return result;*/
+        return ConvertHelper.convertObjectToProperty(question);
     }
 }

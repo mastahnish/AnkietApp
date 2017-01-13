@@ -1,9 +1,8 @@
 package com.solutions.myo.ankietapp.firebase.database.models;
 
 import com.google.firebase.database.Exclude;
-import com.solutions.myo.ankietapp.firebase.database.IFirebaseStorage;
+import com.solutions.myo.ankietapp.firebase.database.utils.ConvertHelper;
 import com.solutions.myo.ankietapp.objects.Selfie;
-import com.solutions.myo.ankietapp.utils.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +27,9 @@ public class FSelfie {
     @Exclude
     public static Map<String, Object> toMap(Selfie selfie) {
         HashMap<String, Object> result = new HashMap<>();
-        if(!StringUtils.isEmpty(selfie.getEncodedPhoto())) result.put(IFirebaseStorage.ISelfie.PHOTO, selfie.getEncodedPhoto());
+/*        if(!StringUtils.isEmpty(selfie.getEncodedPhoto())) result.put(IFirebaseStorage.ISelfie.PHOTO, selfie.getEncodedPhoto());
         result.put(IFirebaseStorage.ISelfie.SMILE_MEASURE, String.valueOf(selfie.getSmileMeasure()));
-        return result;
-//        return ConvertHelper.convertObjectToProperty(selfie);
+        return result;*/
+        return ConvertHelper.convertObjectToProperty(selfie);
     }
 }

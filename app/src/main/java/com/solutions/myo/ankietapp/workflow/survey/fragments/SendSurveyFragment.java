@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 import com.solutions.myo.ankietapp.R;
@@ -68,6 +69,12 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
     @Override
     public void onSuccess() {
         LogHelper.log(TAG, "::onSuccess::Survey inserted", true);
+        Activity ac = getActivity();
+
+        if(ac!=null){
+            Toast.makeText(ac, R.string.survey_saved, Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+        }
     }
 
     @Override

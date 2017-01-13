@@ -3,6 +3,7 @@ package com.solutions.myo.ankietapp.firebase.database.models;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.solutions.myo.ankietapp.firebase.database.IFirebaseStorage;
+import com.solutions.myo.ankietapp.firebase.database.utils.ConvertHelper;
 import com.solutions.myo.ankietapp.objects.Question;
 import com.solutions.myo.ankietapp.objects.Selfie;
 
@@ -41,7 +42,7 @@ public class FSurvey {
         result.put(IFirebaseStorage.ISurvey.USERNAME, username);
         result.put(IFirebaseStorage.ISurvey.DATE, String.valueOf(date.getTime()));
         result.put(IFirebaseStorage.ISurvey.SELFIE, FSelfie.toMap(selfie));
-//        result.put(IFirebaseStorage.ISurvey.QUESTIONS, ConvertHelper.convertObjectToListProperty(questions));
+        result.put(IFirebaseStorage.ISurvey.QUESTIONS, ConvertHelper.convertObjectToListProperty(questions));
         return result;
     }
 

@@ -1,11 +1,17 @@
 package com.solutions.myo.ankietapp.firebase.database.utils;
 
-@Deprecated
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
+
 public class ConvertHelper {
     private ConvertHelper() {
     }
 
-    /*public static <T> T convertPropertyToObject(Map<String, Object> prop, Class<T> mClass) {
+    public static <T> T convertPropertyToObject(Map<String, Object> prop, Class<T> mClass) {
         if (prop == null || prop.size() <= 0 || mClass == null) {
             return null;
         }
@@ -34,5 +40,4 @@ public class ConvertHelper {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         return mapper.convertValue(data, List.class);
     }
-*/
 }

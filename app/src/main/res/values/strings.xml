@@ -52,7 +52,7 @@
     <string name="user_name">User: %s</string>
     <string name="user_email">e-mail: %s</string>
     <string name="user_uid">ID: %s</string>
-
+    <string name="survey_saved">Zapisane!</string>
 
 
 </resources>

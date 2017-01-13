@@ -19,14 +19,6 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 
-    configurations {
-        compile.exclude module: 'jackson-annotations'
-
-        all*.exclude module: 'jackson-annotations'
-        all*.exclude module: 'jackson-core'
-        all*.exclude module: 'jackson-databind'
-        all*.exclude module: 'jackson-dataformat-csv'
-    }
 }
 
 task clean(type: Delete) {
