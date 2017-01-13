@@ -24,13 +24,13 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.solutions.myo.ankietapp.R;
-import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
-import com.solutions.myo.ankietapp.common.BaseActivity;
+import com.solutions.myo.ankietapp.common.AuthActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityLoginBinding;
+import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
 import com.solutions.myo.ankietapp.logging.LogHelper;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends AuthActivity implements View.OnClickListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         showProgress(false);
     }
 
-    private boolean validateCredentials(){
+    private boolean isCredentialsWrong(){
         // Reset errors.
         binding.email.setError(null);
         binding.password.setError(null);
@@ -91,7 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             binding.password.setError(getString(R.string.error_invalid_password));
             focusView = binding.password;
             cancel = true;
@@ -108,12 +108,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             cancel = true;
         }
 
-        return !cancel;
+        return cancel;
     }
 
     private void attemptLogin() {
         LogHelper.log(TAG, "attemptLogin:",true);
-        if (!validateCredentials()) {
+        if (isCredentialsWrong()) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void attemptSignUp() {
         LogHelper.log(TAG, "attemptSignUp:",true);
-        if (!validateCredentials()) {
+        if (isCredentialsWrong()) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();

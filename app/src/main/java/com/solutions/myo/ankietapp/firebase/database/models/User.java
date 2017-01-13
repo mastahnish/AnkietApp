@@ -1,9 +1,11 @@
-package com.solutions.myo.ankietapp.firebase.database.data;
+package com.solutions.myo.ankietapp.firebase.database.models;
+
+import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
  * Created by Jacek on 2017-01-12.
  */
-
+@IgnoreExtraProperties
 public class User {
 
     public String username;

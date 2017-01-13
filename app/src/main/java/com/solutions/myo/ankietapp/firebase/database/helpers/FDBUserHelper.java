@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.firebase.database.IFirebaseStorage;
-import com.solutions.myo.ankietapp.firebase.database.data.User;
+import com.solutions.myo.ankietapp.firebase.database.models.User;
 
 /**
  * All methods to work with users will be here

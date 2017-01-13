@@ -9,13 +9,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseUser;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.firebase.analytics.FirebaseAnalyticsHelper;
-import com.solutions.myo.ankietapp.common.BaseActivity;
+import com.solutions.myo.ankietapp.common.AuthActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityMenuBinding;
 import com.solutions.myo.ankietapp.logging.LogHelper;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 
-public class MenuActivity extends BaseActivity implements View.OnClickListener {
+public class MenuActivity extends AuthActivity implements View.OnClickListener {
 
     private static final String TAG = MenuActivity.class.getSimpleName();
 

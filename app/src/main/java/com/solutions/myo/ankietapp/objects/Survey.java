@@ -13,6 +13,15 @@ public class Survey {
     private Date date;
     private Selfie selfie;
 
+    public Survey() {
+    }
+
+    public Survey(List<Question> questions, Date date, Selfie selfie) {
+        this.questions = questions;
+        this.date = date;
+        this.selfie = selfie;
+    }
+
     public List<Question> getQuestions() {
         return questions;
     }

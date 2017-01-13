@@ -1,6 +1,9 @@
 package com.solutions.myo.ankietapp.workflow.survey.data;
 
 import com.solutions.myo.ankietapp.objects.Question;
+import com.solutions.myo.ankietapp.objects.Selfie;
+import com.solutions.myo.ankietapp.objects.Survey;
+import com.solutions.myo.ankietapp.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +25,8 @@ public class SurveyFlowMemory {
     private String encodedPhoto;
 
     private int smileMeasurement;
+
+    private Survey currentSurvey;
 
     public Question getCurrentQuestion() {
         return currentQuestion;
@@ -75,14 +80,51 @@ public class SurveyFlowMemory {
         this.smileMeasurement = smileMeasurement;
     }
 
+
+    public Survey getCurrentSurvey() {
+        return currentSurvey;
+    }
+
+    public void setCurrentSurvey(Survey currentSurvey) {
+        this.currentSurvey = currentSurvey;
+    }
+
+    public Survey createSurvey(){
+        Survey newSurvey = new Survey();
+
+        if(surveyDate!=null){
+            newSurvey.setDate(surveyDate);
+        }
+
+
+        if(currentQuestionList!=null){
+            newSurvey.setQuestions(currentQuestionList);
+        }
+
+        Selfie currentSelfie = createSelfie();
+
+        if(currentSelfie!=null){
+            newSurvey.setSelfie(currentSelfie);
+        }
+
+        setCurrentSurvey(newSurvey);
+
+        return newSurvey;
+    }
+
+    private Selfie createSelfie(){
+        Selfie newSelfie = new Selfie();
+
+        if(!StringUtils.isEmpty(getEncodedPhoto())){
+            newSelfie.setSmileMeasure(getSmileMeasurement());
+            newSelfie.setEncodedPhoto(getEncodedPhoto());
+        }
+
+        return newSelfie;
+    }
+
     @Override
     public String toString() {
-        return "SurveyFlowMemory{" +
-                "surveyDate=" + surveyDate +
-                ", currentQuestion=" + currentQuestion +
-                ", currentQuestionList=" + currentQuestionList +
-                ", encodedPhoto='" + encodedPhoto + '\'' +
-                ", smileMeasurement=" + smileMeasurement +
-                '}';
+        return super.toString();
     }
 }

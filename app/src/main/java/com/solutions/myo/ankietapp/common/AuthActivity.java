@@ -16,9 +16,9 @@ import com.solutions.myo.ankietapp.workflow.menu.MenuActivity;
  * Created by Jacek on 2017-01-12.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class AuthActivity extends AppCompatActivity {
 
-    private static final String TAG = BaseActivity.class.getSimpleName();
+    private static final String TAG = AuthActivity.class.getSimpleName();
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
