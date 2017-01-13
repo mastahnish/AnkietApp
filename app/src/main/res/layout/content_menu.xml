@@ -102,21 +102,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/user_name"
                 android:visibility="gone"
-                android:textAppearance="@style/ankietapp_text_inputs_text" />
+                android:textAppearance="@style/ankietapp_text_white_inputs_text" />
 
             <TextView
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_email"
-                android:textAppearance="@style/ankietapp_text_inputs_text" />
+                android:textAppearance="@style/ankietapp_text_white_inputs_text" />
 
             <TextView
                 android:id="@+id/user_uid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_uid"
-                android:textAppearance="@style/ankietapp_text_inputs_text" />
+                android:textAppearance="@style/ankietapp_text_white_inputs_text" />
 
             <ImageView
                 android:id="@+id/user_image"

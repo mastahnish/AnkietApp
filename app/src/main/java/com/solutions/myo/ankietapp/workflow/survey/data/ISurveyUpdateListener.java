@@ -6,6 +6,7 @@ package com.solutions.myo.ankietapp.workflow.survey.data;
 
 public interface ISurveyUpdateListener {
 
+    void onStarted();
     void onSuccess();
     void onUnexpectedFailure();
     void onFailure(Object error);

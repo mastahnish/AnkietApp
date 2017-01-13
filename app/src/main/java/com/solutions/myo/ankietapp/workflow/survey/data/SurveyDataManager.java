@@ -26,9 +26,8 @@ public class SurveyDataManager implements ValueEventListener{
     private ISurveyUpdateListener mUpdateListener;
     private String uid;
 
-    //TODO define argument dependning db structure
+
     public void sendSurvey(Survey survey, ISurveyUpdateListener listener){
-        //TODO sendSurvey to Firebase
         LogHelper.log(TAG, "::sendSurvey::", true);
         mSurvey = survey;
         mUpdateListener = listener;
@@ -39,6 +38,7 @@ public class SurveyDataManager implements ValueEventListener{
 
 
     private void addListenerForSingleValueEvent(){
+        mUpdateListener.onStarted();
         mDatabase.child(IFirebaseStorage.IRootChild.USERS).child(uid).addListenerForSingleValueEvent(this);
     }
 

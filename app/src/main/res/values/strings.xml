@@ -53,6 +53,7 @@
     <string name="user_email">e-mail: %s</string>
     <string name="user_uid">ID: %s</string>
     <string name="survey_saved">Zapisane!</string>
+    <string name="sending">Wysyłanie...</string>
 
 
 </resources>

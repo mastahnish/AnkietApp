@@ -58,10 +58,23 @@
         <item name="android:textColor">@color/primaryWhite</item>
     </style>
 
-    <style name="ankietapp_text_inputs_text" parent="ankietapp_font_text_style">
+    <style name="ankietapp_text_white_inputs_text" parent="ankietapp_font_text_style">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primaryWhite</item>
+    </style>
+
+    <style name="ankietapp_text_accent_inputs_text" parent="ankietapp_font_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="ankietapp_dialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        //TODO change dialog text style appropriately
+        //FIXME ttextAppearanceMedium doesn't work
+        <item name="android:textAppearanceMedium">@style/ankietapp_text_white_inputs_text</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 

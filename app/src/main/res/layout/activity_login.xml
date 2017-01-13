@@ -45,7 +45,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    style="@style/ankietapp_text_inputs_text"
+                    style="@style/ankietapp_text_white_inputs_text"
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
@@ -61,7 +61,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    style="@style/ankietapp_text_inputs_text"
+                    style="@style/ankietapp_text_white_inputs_text"
                     android:layout_height="wrap_content">
 
                     <EditText
