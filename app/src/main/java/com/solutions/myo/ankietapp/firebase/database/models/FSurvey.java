@@ -7,6 +7,7 @@ import com.solutions.myo.ankietapp.firebase.database.utils.ConvertHelper;
 import com.solutions.myo.ankietapp.objects.Question;
 import com.solutions.myo.ankietapp.objects.Selfie;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class FSurvey {
 
+    private String firebaseKey;
     private String uid;
     private String username;
     private List<Question> questions;
@@ -27,7 +29,9 @@ public class FSurvey {
     public FSurvey() {
     }
 
-    public FSurvey(String uid, String username, List<Question> questions, Date date, Selfie selfie) {
+
+    public FSurvey(String key, String uid, String username, List<Question> questions, Date date, Selfie selfie) {
+        this.firebaseKey = key;
         this.uid = uid;
         this.username = username;
         this.questions = questions;
@@ -39,8 +43,9 @@ public class FSurvey {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put(IFirebaseStorage.ISurvey.UID, uid);
+        result.put(IFirebaseStorage.ISurvey.KEY, firebaseKey);
         result.put(IFirebaseStorage.ISurvey.USERNAME, username);
-        result.put(IFirebaseStorage.ISurvey.DATE, String.valueOf(date.getTime()));
+        result.put(IFirebaseStorage.ISurvey.DATE, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date));
         result.put(IFirebaseStorage.ISurvey.SELFIE, FSelfie.toMap(selfie));
         result.put(IFirebaseStorage.ISurvey.QUESTIONS, ConvertHelper.convertObjectToListProperty(questions));
         return result;

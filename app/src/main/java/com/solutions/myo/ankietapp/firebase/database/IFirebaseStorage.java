@@ -24,6 +24,7 @@ public interface IFirebaseStorage {
 
     interface ISurvey {
         String UID = "uid";
+        String KEY = "key";
         String USERNAME = "username";
         String DATE = "date";
         String SELFIE = "selfie";

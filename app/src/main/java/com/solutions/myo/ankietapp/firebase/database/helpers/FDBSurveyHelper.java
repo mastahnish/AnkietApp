@@ -24,11 +24,11 @@ public class FDBSurveyHelper {
 
         String key = FirebaseDatabase.getInstance().getReference().child(IFirebaseStorage.IRootChild.SURVEYS).push().getKey();
         //TODO create separate model for Firebase Updates
-        FSurvey fSurvey = new FSurvey(uid, username, survey.getQuestions(), survey.getDate(), survey.getSelfie());
+        FSurvey fSurvey = new FSurvey(key, uid, username, survey.getQuestions(), survey.getDate(), survey.getSelfie());
         Map<String, Object> surveyValues = fSurvey.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(IFirebaseStorage.IRootChildUpdates.SURVEYS + key, surveyValues);
+        childUpdates.put(IFirebaseStorage.IRootChildUpdates.SURVEYS + uid + "/" + key, surveyValues);
 
         FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates).addOnFailureListener(failureListener).addOnCompleteListener(successListener);
 
