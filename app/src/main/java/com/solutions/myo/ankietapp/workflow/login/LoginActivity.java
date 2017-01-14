@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 import com.solutions.myo.ankietapp.R;
 import com.solutions.myo.ankietapp.common.AuthActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
@@ -48,6 +49,8 @@ public class LoginActivity extends AuthActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogHelper.log(TAG, "::onCreate!", true);
+        checkIfUserExist();
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalyticsHelper = new FirebaseAnalyticsHelper(mFirebaseAnalytics);
@@ -73,9 +76,22 @@ public class LoginActivity extends AuthActivity implements View.OnClickListener 
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        LogHelper.log(TAG, "::onStart!", true);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         showProgress(false);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogHelper.log(TAG, "::onStop!", true);
     }
 
     private boolean isCredentialsWrong(){
@@ -84,8 +100,8 @@ public class LoginActivity extends AuthActivity implements View.OnClickListener 
         binding.password.setError(null);
 
         // Store values at the time of the login attempt.
-        email = binding.email.getText().toString();
-        password = binding.password.getText().toString();
+        email = binding.email.getText().toString().trim();
+        password = binding.password.getText().toString().trim();
 
         boolean cancel = false;
 
@@ -137,19 +153,6 @@ public class LoginActivity extends AuthActivity implements View.OnClickListener 
             showProgress(true);
             createAccount();
         }
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LogHelper.log(TAG, "::onStart!", true);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LogHelper.log(TAG, "::onStop!", true);
     }
 
     private void proceedWithLogin() {
@@ -281,6 +284,17 @@ public class LoginActivity extends AuthActivity implements View.OnClickListener 
             //TODO some other options for login like Facebook or so
         }
 
+    }
+
+    private void checkIfUserExist(){
+        FirebaseUser firebaseUser = getFirebaseAuth().getCurrentUser();
+        if(firebaseUser!=null){
+            navigateNext();
+            if(this!=null){
+                this.finish();
+            }
+
+        }
     }
 
 }

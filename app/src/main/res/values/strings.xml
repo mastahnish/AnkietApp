@@ -54,6 +54,8 @@
     <string name="user_uid">ID: %s</string>
     <string name="survey_saved">Zapisane!</string>
     <string name="sending">Wysyłanie...</string>
+    <string name="log_out">Wylogowanie</string>
+    <string name="log_out_message">Czy na pewno chcesz się wylogować?</string>
 
 
 </resources>
