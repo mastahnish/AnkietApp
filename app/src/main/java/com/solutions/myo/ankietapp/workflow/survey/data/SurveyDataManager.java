@@ -70,7 +70,9 @@ public class SurveyDataManager implements ValueEventListener{
     OnCompleteListener onInsertCompleteListener = new OnCompleteListener() {
         @Override
         public void onComplete(@NonNull Task task) {
-            mUpdateListener.onSuccess();
+            if(task.isSuccessful()){
+                mUpdateListener.onSuccess();
+            }
         }
     };
 

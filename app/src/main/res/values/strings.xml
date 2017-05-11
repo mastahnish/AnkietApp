@@ -128,6 +128,9 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="work_in_progress">Pracujemy nad tym!</string>
+    <string name="log_out">Wylogowanie</string>
+    <string name="log_out_message">Czy na pewno chcesz się wylogować?</string>
+    <string name="send_failed">Wysyłanie nie powiodło się</string>
 
 
 </resources>

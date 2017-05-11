@@ -102,8 +102,22 @@ public class SendSurveyFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onFailure(Object error) {
-        if(error instanceof DatabaseError)  LogHelper.log(TAG, "::onFailure::Survey failed to insert: " + ((DatabaseError) error).getMessage(), true);
-        if(error instanceof Exception)  LogHelper.log(TAG, "::onFailure::Survey failed to insert: " + ((Exception) error).getMessage(), true);
+        String message = "";
+        if(error instanceof DatabaseError){
+            message = ((DatabaseError) error).getMessage();
+            LogHelper.log(TAG, "::onFailure::DatabaseError::Survey failed to insert: " + message, true);
+        }
+        if(error instanceof Exception) {
+            message = ((Exception) error).getMessage();
+            LogHelper.log(TAG, "::onFailure::Exception::Survey failed to insert: " + message, true);
+        }
+
+        Activity ac = getActivity();
+
+        if(ac!=null){
+            Toast.makeText(ac, R.string.send_failed, Toast.LENGTH_SHORT).show();
+        }
+
         progressHelper.hideProgressDialog();
     }
 }

@@ -73,6 +73,7 @@
     <style name="ankietapp_dialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
         //TODO change dialog text style appropriately
         //FIXME ttextAppearanceMedium doesn't work
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textAppearanceMedium">@style/ankietapp_text_white_inputs_text</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>

@@ -14,9 +14,11 @@ import com.solutions.myo.ankietapp.common.AuthActivity;
 import com.solutions.myo.ankietapp.common.IAuthAction;
 import com.solutions.myo.ankietapp.databinding.ActivityMenuBinding;
 import com.solutions.myo.ankietapp.logging.LogHelper;
+import com.solutions.myo.ankietapp.ui.alertdialog.AlertDialogHelper;
+import com.solutions.myo.ankietapp.ui.alertdialog.IAlertDialogListener;
 import com.solutions.myo.ankietapp.workflow.survey.SurveyActivity;
 
-public class MenuActivity extends AuthActivity implements View.OnClickListener {
+public class MenuActivity extends AuthActivity implements View.OnClickListener, IAlertDialogListener {
 
     private static final String TAG = MenuActivity.class.getSimpleName();
 
@@ -24,6 +26,8 @@ public class MenuActivity extends AuthActivity implements View.OnClickListener {
 
     private FirebaseAnalyticsHelper mFirebaseAnalyticsHelper;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private AlertDialogHelper alertDialogHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MenuActivity extends AuthActivity implements View.OnClickListener {
 
         updateUserInfo();
 
+        alertDialogHelper = new AlertDialogHelper(this);
 
     }
 
@@ -66,8 +71,7 @@ public class MenuActivity extends AuthActivity implements View.OnClickListener {
                 break;
             case R.id.email_sign_out_button:
                 mFirebaseAnalyticsHelper.logSignOutButtonClickedEvent();
-                setAuthAction(IAuthAction.SIGN_OUT);
-                getFirebaseAuth().signOut();
+                alertDialogHelper.createAlertDialog(getString(R.string.log_out), getString(R.string.log_out_message));
                 break;
         }
 
@@ -94,6 +98,23 @@ public class MenuActivity extends AuthActivity implements View.OnClickListener {
     private void navigateToSurvey() {
         Intent myIntent = new Intent(this, SurveyActivity.class);
         startActivity(myIntent);
+    }
+
+
+    @Override
+    public void onYesClicked() {
+        setAuthAction(IAuthAction.SIGN_OUT);
+        getFirebaseAuth().signOut();
+    }
+
+    @Override
+    public void onNoClicked() {
+
+    }
+
+    @Override
+    public void onMaybeClicked() {
+
     }
 
 

@@ -23,7 +23,7 @@ public abstract class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private int authAction = IAuthAction.AMBIGUOUS;
+    private int authAction;
 
     private LoginDataManager loginDataManager;
 
@@ -89,6 +89,7 @@ public abstract class AuthActivity extends AppCompatActivity {
     }
 
     private void toggleAction(FirebaseAuth firebaseAuth){
+        LogHelper.log(TAG, "::toggleAction::authAction: " + authAction,  true);
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
@@ -138,7 +139,7 @@ public abstract class AuthActivity extends AppCompatActivity {
     }
 
 
-    private void navigateNext() {
+    public void navigateNext() {
         Intent myIntent = new Intent(this, MenuActivity.class);
         startActivity(myIntent);
         finish();
