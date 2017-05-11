@@ -3,6 +3,7 @@ package com.solutions.myo.ankietapp.workflow.menu;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -87,6 +88,7 @@ public class MenuActivity extends AuthActivity implements View.OnClickListener {
 
      private void navigateToAnalytics() {
         //TODO make analytics
+         Snackbar.make(binding.getRoot(), R.string.work_in_progress, Snackbar.LENGTH_SHORT).show();
     }
 
     private void navigateToSurvey() {

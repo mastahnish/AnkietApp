@@ -32,12 +32,12 @@
 
 
         <FrameLayout
-            android:id="@+id/fragmentContainer"
+        android:id="@+id/fragmentContainer"
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_buttons"
-            android:layout_below="@id/breadcrumbs" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_buttons"
+        android:layout_below="@id/breadcrumbs" />
 
         <LinearLayout
             android:id="@+id/bottom_buttons"
