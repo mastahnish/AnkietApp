@@ -38,7 +38,7 @@
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Potrzebujemy dostępu do kamery</string>
     <string name="no_camera_permission">Niestety nie można zrobić zdjęcia bez kamery.\nNadaj uprawnienia</string>
-    <string name="low_storage_error">Potrzebujemy więcej miejsca na dyskuy żeby pobrać rozpoznawanie twarzy. Usuń niepotrzebne dane.</string>
+    <string name="low_storage_error">Potrzebujemy więcej miejsca na dysku żeby pobrać rozpoznawanie twarzy. Usuń niepotrzebne dane.</string>
     <string name="overwrite_photo">Chcesz zastąpić poprzednie zdjęcie?</string>
     <string name="photo">Zdjęcie</string>
     <string name="yes">Tak</string>
