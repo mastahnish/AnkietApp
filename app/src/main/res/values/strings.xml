@@ -26,11 +26,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="question_first">Czy byłaś grzeczna?</string>
-    <string name="question_second">Czy wkurzyłaś się dzisiaj na pracę?</string>
+    <string name="question_first">Czy byłeś(aś) dzisiaj w porzadku?</string>
+    <string name="question_second">Czy wkurzyłeś(aś) się dzisiaj na pracę?</string>
     <string name="question_third">Jak czysto jest w mieszkaniu?</string>
-    <string name="question_fourth">Czy pokłóciłaś się dzisiaj z Jackiem?</string>
-    <string name="question_fifth">Czy zrobiłaś dzisiaj coś pożytecznego?</string>
+    <string name="question_fourth">Czy pokłóciłeś(aś) się dzisiaj z kimś?</string>
+    <string name="question_fifth">Czy zrobiłeś(aś) dzisiaj coś pożytecznego?</string>
     <string name="question_sixth">Ogólna samoocena</string>
     <string name="send_survey">Wyślij</string>
 
